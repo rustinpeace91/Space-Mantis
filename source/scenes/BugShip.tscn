@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://art/bugsplode2.png" type="Texture" id=1]
+[ext_resource path="res://art/bugsplode3.png" type="Texture" id=2]
+[ext_resource path="res://art/bugsplode4.png" type="Texture" id=3]
+[ext_resource path="res://art/bug.png" type="Texture" id=4]
+[ext_resource path="res://art/bugsplode1.png" type="Texture" id=5]
+[ext_resource path="res://scripts/BugShip.gd" type="Script" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "destroy",
+"speed": 15.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 134.0
+height = 424.0
+
+[node name="BugShip" type="Area2D" groups=["enemies"]]
+scale = Vector2( 0.08, 0.08 )
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="ShotPos" type="Position2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_BugShip_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

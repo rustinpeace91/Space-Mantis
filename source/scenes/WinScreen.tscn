@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/Ricasso-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/PressStart2P.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scripts/WinScreen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 72
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 94.0
+margin_top = 454.0
+margin_right = 652.0
+margin_bottom = 526.0
+custom_colors/font_color = Color( 0.0509804, 1, 0.0431373, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "YOU WIN!!!!"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 246.0
+margin_top = 621.0
+margin_right = 449.0
+margin_bottom = 690.0
+
+[node name="Label" type="Label" parent="Button"]
+margin_left = 36.0
+margin_top = 28.0
+margin_right = 148.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+text = "Restart"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -1,0 +1,63 @@
+@startuml
+class Ship{
+  int Health
+  void controls()
+  void collision_detection()
+  void explosion_animation()
+  spawn_projectile
+}
+
+class GLOBALS{
+  int screen_width
+  int screen_height
+  int enemy_divind_line
+  int gamescore 
+  bool player_dead
+}
+
+class Space{
+  space_animation()
+}
+
+class EnemyShip {
+  int health
+  collision detection
+  void explosion_animation()
+  spawn_projectile()
+}
+
+class Projectile {
+  # Collision detection
+}
+
+class EnemyLogic {
+
+}
+
+class UI {
+  # Displays health, ammo 
+  # Options menu 
+}
+
+
+class LevelLoop {
+  # Contains parameters for which enemies to spawn, shot timer 
+  # Decide when to spawn enemies
+  # Spawns ship 
+  # Spawns projectiles
+  # Keeps track of all enemies on screen
+  # Difficulty factor 
+  # Activates enemy attacks (signal?) 
+  # includes Bonus Level logic
+  # When enemies defeated, clears the board and sends signal to advance to next level
+}
+
+class GameLoop {
+  # Contains UI, Ship, LevelLoop, 
+# Array of instances of LevelLoop
+# Controls difficulty of each level
+# Instantiates LevelLoop and queue_frees them when completed
+# shows stage clear scene 
+# keeps track of score
+}
+@enduml

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Space.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/SpawnGrid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/LevelLogic.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "shimmy"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3, 4.6, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 30, 0 ), Vector2( 0, 0 ), Vector2( -30, 0 ), Vector2( 0, 0 ) ]
+}
+
+[node name="LevelLogic" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="space" parent="." instance=ExtResource( 2 )]
+
+[node name="Ship" parent="." instance=ExtResource( 1 )]
+position = Vector2( 361, 907 )
+
+[node name="ShotTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../SpawnGrid")
+anims/shimmy = SubResource( 1 )
+
+[node name="SpawnGrid" parent="." instance=ExtResource( 3 )]
+
+[connection signal="player_dead" from="Ship" to="." method="_on_Ship_player_dead"]
+[connection signal="shoot" from="Ship" to="." method="_on_ship_shoot"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
